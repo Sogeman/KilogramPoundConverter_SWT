@@ -68,12 +68,12 @@ public class Converter {
 		frame.getContentPane().add(lblKilogrammpfundRechner);
 		
 		JLabel lblNewLabel = new JLabel("Kilogramm");
-		lblNewLabel.setToolTipText("erlaubt bis Max Int");
+		lblNewLabel.setToolTipText("erlaubt bis Max INT");
 		lblNewLabel.setBounds(159, 78, 73, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
 		inputPound = new JTextField();
-		inputPound.setToolTipText("erlaubt bis Max Int");
+		inputPound.setToolTipText("erlaubt bis Max INT");
 		inputPound.setColumns(10);
 		inputPound.setBounds(10, 106, 143, 20);
 		frame.getContentPane().add(inputPound);
@@ -90,31 +90,29 @@ public class Converter {
 		resultBox.setBounds(10, 177, 387, 20);
 		frame.getContentPane().add(resultBox);
 		
-		JButton btnBerechnen = new JButton("Berechnen");
-		btnBerechnen.addActionListener(new ActionListener() {
+		JButton buttonConvert = new JButton("Berechnen");
+		buttonConvert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String kilogram = inputKilogram.getText();
 				String pound = inputPound.getText();
 				df.setRoundingMode(RoundingMode.UP);
 				
-				if(kilogram.length() > 0) {
+				if(kilogram.length() > 0) {	
 					ConverterToPounds converter = new ConverterToPounds();
-					double kg = Double.parseDouble(kilogram);
-					if(kg <= Integer.MAX_VALUE) {
-						double result = converter.convert(kg);						
-						resultBox.setText(kilogram + " kg sind " + df.format(result) + " lb");
+					double result = converter.setup(kilogram);
+					if(result != 0 && result != 1) {
+						resultBox.setText(kilogram + " kg sind " + df.format(result) + " lb");						
 					} else {
-						// throw error
+						resultBox.setText(error((int) result));
 					}
 				}
 				else if(pound.length() > 0) {
-					ConverterToKilogram converter = new ConverterToKilogram();
-					double lb = Double.parseDouble(pound);
-					if(lb <= Integer.MAX_VALUE) {
-						double result = converter.convert(lb);						
+					ConverterToKilogram converter = new ConverterToKilogram();	
+					double result = converter.setup(pound);
+					if(result != 0 && result != 1) {
 						resultBox.setText(pound + " lb sind " + df.format(result) + " kg");
 					} else {
-						// throw error
+						resultBox.setText(error((int) result));
 					}
 				}
 				
@@ -123,9 +121,17 @@ public class Converter {
 			}
 		});
 		
-		btnBerechnen.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnBerechnen.setBounds(259, 89, 105, 23);
-		frame.getContentPane().add(btnBerechnen);
+		buttonConvert.setFont(new Font("Tahoma", Font.BOLD, 11));
+		buttonConvert.setBounds(259, 89, 105, 23);
+		frame.getContentPane().add(buttonConvert);
+	}
+	
+	public String error(int errorCode) {
+		if (errorCode == 0) {
+			return "Error - Input größer als Max INT";
+		} else {
+			return "Input muss Zahl sein";
+		}
 	}
 	
 	
