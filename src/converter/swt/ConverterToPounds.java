@@ -11,7 +11,7 @@ public class ConverterToPounds implements ConverterInterface {
 	public double setup(String kilogram) {
 		try {
 			double kg = Double.parseDouble(kilogram);
-			if(kg <= Integer.MAX_VALUE) {
+			if(kg <= Integer.MAX_VALUE && kg > 0) {
 				double result = convert(kg);						
 				return result;
 			} else {

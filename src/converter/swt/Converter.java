@@ -128,7 +128,7 @@ public class Converter {
 	
 	public String error(int errorCode) {
 		if (errorCode == 0) {
-			return "Error - Input größer als Max INT";
+			return "Error - Input größer als Max INT oder kleiner als 1";
 		} else {
 			return "Input muss Zahl sein";
 		}

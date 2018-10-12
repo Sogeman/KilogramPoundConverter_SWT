@@ -11,7 +11,7 @@ public class ConverterToKilogram implements ConverterInterface {
 	public double setup(String pound) {
 		try {
 			double lb = Double.parseDouble(pound);
-			if(lb <= Integer.MAX_VALUE) {
+			if(lb <= Integer.MAX_VALUE && lb > 0) {
 				double result = convert(lb);						
 				return result;
 			} else {
