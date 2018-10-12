@@ -23,7 +23,8 @@ public class ConverterToPoundsTest {
 		expectedNumbers.add(2147483646.0);
 		expectedNumbers.add(2147483647.0);
 		expectedNumbers.add(2147483648.0);
-
+		//TODO add iterate over array for test
+		
 		double kilogram = 1.0;
 		double expected = 2.21;
 		// act
