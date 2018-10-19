@@ -16,50 +16,61 @@ public class ConverterToPoundsTest {
 	public void testConvert() {
 		// assign
 		ConverterToPounds converter = new ConverterToPounds();
-		List<Double> expectedNumbers = new ArrayList<>();
-		expectedNumbers.add(-1.0);
-		expectedNumbers.add(0.0);
-		expectedNumbers.add(1.0);
-		expectedNumbers.add(2147483646.0);
-		expectedNumbers.add(2147483647.0);
-		expectedNumbers.add(2147483648.0);
-		//TODO add iterate over array for test
+		List<Double> inputNumbers = new ArrayList<>();
+		inputNumbers.add(1.0);
+		inputNumbers.add(20.6);
+		inputNumbers.add(359.8);
 		
-		double kilogram = 1.0;
-		double expected = 2.21;
-		// act
-		double actual = converter.convert(kilogram);
-		// assert
-		assertEquals(expected, actual, 0.01);
+		List<Double> expectedNumbers = new ArrayList<>();
+		expectedNumbers.add(2.21);
+		expectedNumbers.add(45.42);
+		expectedNumbers.add(793.22);
+		
+		// act & assert
+		for (int i = 0; i < inputNumbers.size(); i++) {
+			double actual = converter.convert(inputNumbers.get(i));
+			assertEquals(expectedNumbers.get(i), actual, 0.01);
+		}
 	}
 
 	@Test
 	public void testSetupReturnResult() {
 		// assign
 		ConverterToPounds converter = new ConverterToPounds();
-		String kilogram = "1";
-		double expected = 2.21;
+		String kilogram1 = "1";
+		String kilogram2 = "2147483646.0";
+		String kilogram3 = "2147483647.0";
+		double expected1 = 2.21;
+		double expected2 = 4734391026.022;
+		double expected3 = 4734391028.227;
 		// act
-		double actual = converter.setup(kilogram);
+		double actual1 = converter.setup(kilogram1);
+		double actual2 = converter.setup(kilogram2);
+		double actual3 = converter.setup(kilogram3);
 		// assert
-		assertEquals(expected, actual, 0.01);
+		assertEquals(expected1, actual1, 0.01);
+		assertEquals(expected2, actual2, 0.01);
+		assertEquals(expected3, actual3, 0.01);
 	}
 
 	@Test
-	public void testSetupReturn0() {
+	public void testSetupReturn0() { //TODO 0, -1, maxint +1
 		// assign
 		ConverterToPounds converter = new ConverterToPounds();
-		String kilogram = "2147483648";
+		String kilogram1 = "2147483648"; //max int +1
+		String kilogram2 = "0";
 		double expected = 0;
 		// act
-		double actual = converter.setup(kilogram);
+		double actual1 = converter.setup(kilogram1);
+		double actual2 = converter.setup(kilogram2);
 		// assert
-		assertEquals(expected, actual, 0.01);
+		assertEquals(expected, actual1, 0.01);
+		assertEquals(expected, actual2, 0.01);
 
 	}
 
 	@Test
-	public void testSetupReturn1() {
+	public void testSetupReturn1() { // TODO change to exception test?
 		// assign
 		ConverterToPounds converter = new ConverterToPounds();
 		String kilogram = "abc";
