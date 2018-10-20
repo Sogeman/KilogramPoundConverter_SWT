@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import converter.swt.ConverterToKilogram;
+import converter.swt.ConverterLogic;
 import converter.swt.ConverterToPounds;
 
 public class ConverterToKilogramsTest {
@@ -15,7 +15,7 @@ public class ConverterToKilogramsTest {
 	@Test
 	public void testConvert() {
 		// assign
-		ConverterToKilogram converter = new ConverterToKilogram();
+		ConverterLogic converter = new ConverterLogic();
 		List<Double> inputNumbers = new ArrayList<>();
 		inputNumbers.add(1.0);
 		inputNumbers.add(20.6);
