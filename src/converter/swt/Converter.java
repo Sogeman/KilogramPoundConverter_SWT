@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextPane;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
+
+import org.junit.experimental.categories.Categories.ExcludeCategory;
+
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -93,44 +96,59 @@ public class Converter {
 		JButton buttonConvert = new JButton("Berechnen");
 		buttonConvert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
 				String kilogramString = inputKilogram.getText();
-				double kilogramDouble = Double.parseDouble(kilogramString);
 				String poundString = inputPound.getText();
-				double poundDouble = Double.parseDouble(poundString);
+
+				double kilogramDouble = 0;
+				try {
+					kilogramDouble = parseInput(kilogramString);
+				} catch (Exception e2) {
+					resultBox.setText(error(-2.6983497359));
+				}
+				double poundDouble = 0;
+				try {
+					poundDouble = parseInput(poundString);
+				} catch (Exception e2) {
+					resultBox.setText(error(-2.6983497359));
+				}
 
 				df.setRoundingMode(RoundingMode.UP);
 
+				if (kilogramDouble == -2.6983497359 || poundDouble == -2.6983497359) {
+					resultBox.setText(error(-2.6983497359));
+				}
+
 				if (kilogramDouble > 0) {
-					double result = setup(kilogramDouble, "kilogram");
-					if (result != 0 && result != 1) {
-						resultBox.setText(kilogramDouble + " kg sind " + df.format(result) + " lb");
-					} else {
-						try {
+					double result;
+					try {
+						result = setup(kilogramDouble, "kilogram");
+						if (result != 0 && result != 1) {
+							resultBox.setText(kilogramDouble + " kg sind " + df.format(result) + " lb");
+						} else {
+
 							resultBox.setText(error((int) result));
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
 						}
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 				} else if (poundDouble > 0) {
-					double result = setup(poundDouble, "pound");
-					if (result != 0 && result != 1) {
-						resultBox.setText(poundDouble + " lb sind " + df.format(result) + " kg");
-					} else {
-						try {
-							resultBox.setText(error((int) result));
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				} else {
+					double result;
 					try {
-						resultBox.setText(error(0));
-					} catch (Exception e) {
+						result = setup(poundDouble, "pound");
+						if (result != 0 && result != 1) {
+							resultBox.setText(poundDouble + " lb sind " + df.format(result) + " kg");
+						} else {
+
+							resultBox.setText(error((int) result));
+						}
+					} catch (Exception e1) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						e1.printStackTrace();
 					}
+				} else if (kilogramDouble <= 0 || poundDouble <= 0) {
+					resultBox.setText(error(0));
 				}
 
 				inputKilogram.setText("");
@@ -143,27 +161,30 @@ public class Converter {
 		frame.getContentPane().add(buttonConvert);
 	}
 
-	public String error(int errorCode) throws Exception {
+	public String error(double errorCode) {
 		if (errorCode == 0) {
 			return "Error - Input größer als Max INT oder kleiner als 1";
-		} else if (errorCode == 1){
+		} else if (errorCode == -2.6983497359) {
 			return "Input muss Zahl sein";
-		} else {
-			throw new Exception("Programmfehlers, bitte Admin verständigen");
 		}
+		return "Program error - contact admin";
 	}
 
-	public double setup(double input, String type) {
+	public double setup(double input, String type) throws Exception {
 		ConverterLogic converter = new ConverterLogic();
-		try {
 		if (input <= Integer.MAX_VALUE) {
 			double result = converter.convert(input, type);
 			return result;
 		} else {
 			return 0;
 		}
-		} catch (NumberFormatException | NullPointerException nfe) {
-			return 1;
+	}
+
+	public double parseInput(String input) throws Exception {
+		try {
+			return Double.parseDouble(input);
+		} catch (NumberFormatException nfe) {
+			throw new Exception();
 		}
 	}
 
