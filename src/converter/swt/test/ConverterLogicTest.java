@@ -19,7 +19,6 @@ public class ConverterLogicTest {
 		inputNumbers.add(1.0);
 		inputNumbers.add(20.6);
 		inputNumbers.add(359.8);
-		//TODO add iterate over array for test
 		
 		List<Double> expectedNumbers = new ArrayList<>();
 		expectedNumbers.add(2.21);
@@ -28,7 +27,7 @@ public class ConverterLogicTest {
 		
 		// act & assert
 		for (int i = 0; i < inputNumbers.size(); i++) {
-			double actual = converter.convert(inputNumbers.get(i), "kilogram");
+			double actual = converter.convert(inputNumbers.get(i), "kg");
 			assertEquals(expectedNumbers.get(i), actual, 0.01);
 		}
 	}
@@ -41,7 +40,6 @@ public class ConverterLogicTest {
 		inputNumbers.add(1.0);
 		inputNumbers.add(20.6);
 		inputNumbers.add(359.8);
-		//TODO add iterate over array for test
 		
 		List<Double> expectedNumbers = new ArrayList<>();
 		expectedNumbers.add(0.45);
@@ -50,13 +48,21 @@ public class ConverterLogicTest {
 		
 		// act & assert
 		for (int i = 0; i < inputNumbers.size(); i++) {
-			double actual = converter.convert(inputNumbers.get(i), "pound");
+			double actual = converter.convert(inputNumbers.get(i), "lb");
 			assertEquals(expectedNumbers.get(i), actual, 0.01);
 		}
 	}
 	
 	@Test
 	public void testConvertException() {
-		fail("not implemented yet");
+		try {
+			ConverterLogic converter = new ConverterLogic();
+			converter.convert(42, null);
+			fail("Exception not thrown, test failed");
+		} catch (Exception e) {
+			String expectedMessage = "Program Error - contact admin";
+			assertEquals(expectedMessage, e.getMessage());
+		}
 	}
+
 }
