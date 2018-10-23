@@ -17,18 +17,18 @@ public class ConverterLogicTest {
 		ConverterLogic converter = new ConverterLogic();
 		List<Double> inputNumbers = new ArrayList<>();
 		inputNumbers.add(1.0);
-		inputNumbers.add(20.6);
-		inputNumbers.add(359.8);
+		inputNumbers.add(2147483646.0); // maxInt-1
+		inputNumbers.add(2147483647.0); // maxInt
 		
 		List<Double> expectedNumbers = new ArrayList<>();
-		expectedNumbers.add(2.21);
-		expectedNumbers.add(45.42);
-		expectedNumbers.add(793.22);
+		expectedNumbers.add(2.2046);
+		expectedNumbers.add(4734342445.97);
+		expectedNumbers.add(4734342448.18);
 		
 		// act & assert
 		for (int i = 0; i < inputNumbers.size(); i++) {
 			double actual = converter.convert(inputNumbers.get(i), "kg");
-			assertEquals(expectedNumbers.get(i), actual, 0.01);
+			assertEquals(expectedNumbers.get(i), actual, 0.1);
 		}
 	}
 	
@@ -38,13 +38,13 @@ public class ConverterLogicTest {
 		ConverterLogic converter = new ConverterLogic();
 		List<Double> inputNumbers = new ArrayList<>();
 		inputNumbers.add(1.0);
-		inputNumbers.add(20.6);
-		inputNumbers.add(359.8);
+		inputNumbers.add(2147483646.0); // maxInt-1
+		inputNumbers.add(2147483647.0); // maxInt
 		
 		List<Double> expectedNumbers = new ArrayList<>();
 		expectedNumbers.add(0.45);
-		expectedNumbers.add(9.34);
-		expectedNumbers.add(163.20);
+		expectedNumbers.add(974092191.781);
+		expectedNumbers.add(974092192.234);
 		
 		// act & assert
 		for (int i = 0; i < inputNumbers.size(); i++) {

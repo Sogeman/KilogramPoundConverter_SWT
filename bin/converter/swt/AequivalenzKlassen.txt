@@ -1,0 +1,9 @@
+gÄk1: 0 <= x <= maxInt			Test: convert with valid input: 1, maxInt-1, maxInt
+
+
+ugÄk1: x <= 0					Test: checkIfInputBiggerThanZero
+ugÄk2: x > maxInt				Test: checkIfInputUnderMaxValue
+ugÄk3: x = NaN					Test: NumberExceptionThrown
+
+
+Additional Tests: returnFilledInputString(with one input and two), returnTypeOfInput, parseInputToDouble, ConvertException(program error, should never come up)

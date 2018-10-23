@@ -12,6 +12,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 
 import org.junit.experimental.categories.Categories.ExcludeCategory;
 
+import javax.print.attribute.standard.PrinterMessageFromOperator;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -25,7 +26,7 @@ public class Converter {
 	private JFrame frame;
 	private JTextField inputKilogram;
 	private JTextField inputPound;
-	DecimalFormat df = new DecimalFormat("0,00");
+	DecimalFormat df = new DecimalFormat("0.00");
 
 	/**
 	 * Launch the application.
@@ -98,7 +99,7 @@ public class Converter {
 				
 				String stringKilogram = inputKilogram.getText();
 				String stringPound = inputPound.getText();
-
+				
 				df.setRoundingMode(RoundingMode.UP);
 
 				String typeOfInput = returnTypeOfInput(stringKilogram, stringPound);
@@ -120,7 +121,7 @@ public class Converter {
 						if (checkIfInputUnderMaxValue(parsedInput)) {
 							try {
 								double result = converter.convert(parsedInput, typeOfInput);
-								resultBox.setText(parsedInput + " " + typeOfInput + " sind " + df.format(result) + " " + returnTypeOfOutput(stringKilogram, stringPound));
+								resultBox.setText(df.format(parsedInput) + " " + typeOfInput + " sind " + df.format(result) + " " + returnTypeOfOutput(stringKilogram, stringPound));
 							} catch (Exception e) {
 								resultBox.setText(e.getMessage());
 							}
