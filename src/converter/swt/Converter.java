@@ -4,18 +4,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextPane;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
-
-import org.junit.experimental.categories.Categories.ExcludeCategory;
-
-import javax.print.attribute.standard.PrinterMessageFromOperator;
 import javax.swing.JButton;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.awt.event.ActionListener;
@@ -84,6 +76,7 @@ public class Converter {
 		frame.getContentPane().add(lblKilogrammpfundRechner);
 
 		JLabel lblNewLabel = new JLabel("Kilogramm");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel.setBounds(159, 78, 73, 14);
 		frame.getContentPane().add(lblNewLabel);
 
@@ -105,15 +98,18 @@ public class Converter {
 		
 
 		JLabel lblPfund = new JLabel("Pfund");
+		lblPfund.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblPfund.setBounds(159, 109, 60, 14);
 		frame.getContentPane().add(lblPfund);
 
 		JLabel lblErgebnis = new JLabel("Ergebnis:");
+		lblErgebnis.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblErgebnis.setBounds(10, 152, 80, 14);
 		frame.getContentPane().add(lblErgebnis);
 
 		JTextPane resultBox = new JTextPane();
-		resultBox.setBounds(10, 177, 387, 20);
+		resultBox.setEditable(false);
+		resultBox.setBounds(10, 177, 412, 20);
 		frame.getContentPane().add(resultBox);
 
 		JButton buttonConvert = new JButton("Berechnen");

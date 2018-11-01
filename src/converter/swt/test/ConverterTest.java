@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import converter.swt.Converter;
-import converter.swt.ConverterLogic;
 
 public class ConverterTest {
 
