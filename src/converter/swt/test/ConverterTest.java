@@ -35,7 +35,7 @@ public class ConverterTest {
 		assertEquals(expected, actual);
 	}
 	
-	@Test(expected = Exception.class)
+	@Test(expected = Exception.class) // Test remains but function is depracated
 	public void testReturnFilledInputStringDoubleInput() throws Exception {
 		// assign
 		String input1 = "456";
