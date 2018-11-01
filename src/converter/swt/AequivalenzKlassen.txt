@@ -6,4 +6,4 @@ ugÄk2: x > maxInt				Test: checkIfInputUnderMaxValue with max int+1 as input
 ugÄk3: x = NaN					Test: NumberExceptionThrown with input of "abc"
 
 
-Additional Tests: returnFilledInputString(with one input and two), returnTypeOfInput, parseInputToDouble, ConvertException(program error, should never come up)
+Additional Tests: returnFilledInputString(with one input and two, depracated), returnTypeOfInput, parseInputToDouble, ConvertException(program error, should never come up)

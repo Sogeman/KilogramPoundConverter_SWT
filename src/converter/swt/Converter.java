@@ -20,6 +20,8 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Converter {
 
@@ -61,6 +63,16 @@ public class Converter {
 		frame.getContentPane().setLayout(null);
 
 		inputKilogram = new JTextField();
+		inputKilogram.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				if(inputKilogram.getText().length() > 0) {
+					inputPound.setEditable(false);
+				} else {
+					inputPound.setEditable(true);
+				}
+			}
+		});
 		inputKilogram.setToolTipText("maximal 2.147.483.647");
 		inputKilogram.setBounds(10, 75, 143, 20);
 		frame.getContentPane().add(inputKilogram);
@@ -76,10 +88,21 @@ public class Converter {
 		frame.getContentPane().add(lblNewLabel);
 
 		inputPound = new JTextField();
+		inputPound.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(inputPound.getText().length() > 0) {
+					inputKilogram.setEditable(false);
+				} else {
+					inputKilogram.setEditable(true);
+				}
+			}
+		});
 		inputPound.setToolTipText("maximal 2.147.483.647");
 		inputPound.setColumns(10);
 		inputPound.setBounds(10, 106, 143, 20);
 		frame.getContentPane().add(inputPound);
+		
 
 		JLabel lblPfund = new JLabel("Pfund");
 		lblPfund.setBounds(159, 109, 60, 14);
@@ -138,6 +161,8 @@ public class Converter {
 
 				inputKilogram.setText("");
 				inputPound.setText("");
+				inputKilogram.setEditable(true);
+				inputPound.setEditable(true);
 			}
 			
 			private String returnTypeOfOutput(String stringKilogram, String stringPound) {
